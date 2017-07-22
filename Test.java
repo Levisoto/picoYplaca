@@ -7,6 +7,8 @@ class Test {
 public static void main(String args[]) {
 
 
+  //Adding Restrictions-----------------
+  //----------------------------------------------------------------------------
   Restrictions monday = new Restrictions();
   Restrictions tuesday = new Restrictions();
   Restrictions wednesday = new Restrictions();
@@ -48,16 +50,60 @@ public static void main(String args[]) {
   restric.add(thursday);
   restric.add(friday);
 
-  String plate = "CYG-239";
-  String date = "21/07/2017";
-  String time = "08:00:00";
+  //------------------------------------------------------------------------
+  //
+  //Code for Unit Testing--------------------------------------------
+
+  ArrayList<String> plates = new ArrayList<String>();
+  ArrayList<String> dates = new ArrayList<String>();
+  ArrayList<String> times = new ArrayList<String>();
+  ArrayList<String> answers = new ArrayList<String>();
+  
+  plates.add("CDF-245");
+  plates.add("FCV-412");
+  plates.add("JNH-486");
+  plates.add("YUH-475");
+  plates.add("WAS-122");
+
+  dates.add("15/02/2017");
+  dates.add("12/12/2017");
+  dates.add("05/04/2017");
+  dates.add("23/06/2017");
+  dates.add("17/07/2017");
+
+  times.add("20:25:20");
+  times.add("07:02:50");
+  times.add("08:30:45");
+  times.add("17:30:20");
+  times.add("16:20:10");
+
+  answers.add("Can be");
+  answers.add("Can be");
+  answers.add("Can't be");
+  answers.add("Can be");
+  answers.add("Can't be");
+
 
   PicoYPlaca picoyplaca = new PicoYPlaca(restric);
-  picoyplaca.insert(plate,date,time);
 
-  if(picoyplaca.check()){
-    System.out.println("Can't be on the road");
-  }else{System.out.println("Can be on the road");}
+  for(int i=0;i<=(plates.size()-1);i++){
+      System.out.println(plates.get(i)+" "+dates.get(i)+" "+times.get(i)+" -> "+answers.get(i));
+  }
+
+  System.out.println("----------------------------------------------------------------------");
+  System.out.println("----------------------------------------------------------------------");
+  System.out.println("----------------------------------------------------------------------\n");
+  System.out.println("Runing my test\n");
+
+  String string = "";
+  for(int i=0;i<=(plates.size()-1);i++){
+    picoyplaca.insert(plates.get(i),dates.get(i),times.get(i));
+    if(picoyplaca.check()){string = "Can't be";}else{string="Can be";}
+    if(string.equals(answers.get(i))){
+      System.out.println(plates.get(i)+" "+dates.get(i)+" "+times.get(i)+" -> "+string+" -> Pased!");
+    }else { System.out.println(plates.get(i)+" "+dates.get(i)+" "+times.get(i)+" -> "+string+" -> Faild!");
+  }}
+  
 
 }
 
